@@ -1065,52 +1065,65 @@
     
     <script>
         let currentStep = 0;
-            img.src = src;
-        });
+
+        function showStep(stepNumber, animate) {
+            const stepEl = document.getElementById('step-' + stepNumber);
+            if (!stepEl) return;
+
+            stepEl.classList.add('active');
+            if (animate) {
+                stepEl.classList.add('animate');
+            } else {
+                stepEl.classList.remove('animate');
+            }
+            window.scrollTo(0, 0);
+        }
 
         function nextStep() {
-            const currentStepEl = document.getElementById(`step-${currentStep}`);
-            if (currentStepEl) {
-                currentStepEl.classList.add('step-out');
-                
-                setTimeout(() => {
-                    currentStepEl.classList.remove('active');
-                    currentStepEl.classList.remove('step-out');
+            const currentStepEl = document.getElementById('step-' + currentStep);
+            if (!currentStepEl) return;
 
-                    currentStep++;
-                    
-                    const nextStepEl = document.getElementById(`step-${currentStep}`);
-                    if (nextStepEl) {
-                        nextStepEl.classList.add('active', 'animate'); 
-                        window.scrollTo(0, 0); 
-                    }
-                }, 200); 
-            }
+            currentStepEl.classList.add('step-out');
+
+            setTimeout(function () {
+                currentStepEl.classList.remove('active');
+                currentStepEl.classList.remove('animate');
+                currentStepEl.classList.remove('step-out');
+
+                currentStep = currentStep + 1;
+                showStep(currentStep, true);
+            }, 200);
         }
 
         function selectOption(btnElement) {
-            btnElement.classList.add('selected'); 
-            
+            btnElement.classList.add('selected');
+
             const parentStep = btnElement.closest('.step');
             if (parentStep) {
-                parentStep.querySelectorAll('.option-btn').forEach(btn => {
+                parentStep.querySelectorAll('.option-btn').forEach(function (btn) {
                     btn.disabled = true;
                     btn.style.cursor = 'not-allowed';
                 });
             }
 
-            nextStep(); 
-            
-            setTimeout(() => {
-                if (parentStep) {
-                    parentStep.querySelectorAll('.option-btn').forEach(btn => {
-                        btn.disabled = false;
-                        btn.style.cursor = 'pointer';
-                    });
-                }
-                btnElement.classList.remove('selected'); 
-            }, 500); 
+            setTimeout(function () {
+                nextStep();
+
+                setTimeout(function () {
+                    if (parentStep) {
+                        parentStep.querySelectorAll('.option-btn').forEach(function (btn) {
+                            btn.disabled = false;
+                            btn.style.cursor = 'pointer';
+                        });
+                    }
+                    btnElement.classList.remove('selected');
+                }, 500);
+            }, 120);
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            showStep(0, false);
+        });
     </script>
 </body>
 </html>

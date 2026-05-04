@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Balde de Pipoca Trufado</title>
     
-    <!-- Google Font Import -->
+    <!-- Fontes: não bloqueiam a primeira renderização -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"></noscript>
+
+    <!-- Prioridade para a imagem inicial/LCP -->
+    <link rel="preload" as="image" href="imagem1.webp" fetchpriority="high">
     
     <style>
         * {
@@ -43,8 +47,7 @@
         }
 
         .step.active.animate {
-            opacity: 0;
-            animation: fadeInSlideUp 0.5s ease-out forwards;
+            animation: fadeInSlideUp 0.35s ease-out forwards;
         }
         
         .step-out {
@@ -151,6 +154,7 @@
         .image-container img {
             max-width: 100%;
             height: auto;
+            aspect-ratio: auto;
             border-radius: 12px; 
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
@@ -588,19 +592,23 @@
 
     </style>
     
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code: carregado depois da primeira renderização -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '713072690328826');
-    fbq('track', 'PageView');
-    fbq('track', 'ViewContent', {value: 27.00, currency: 'BRL'});
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '713072690328826');
+            fbq('track', 'PageView');
+            fbq('track', 'ViewContent', {value: 27.00, currency: 'BRL'});
+        }, 1200);
+    });
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=713072690328826&ev=PageView&noscript=1"
@@ -622,7 +630,7 @@
             </div>
 
             <div class="image-container">
-                <img src="imagem1.webp" alt="Balde de Pipoca Trufado" loading="eager" fetchpriority="high" decoding="async">
+                <img src="imagem1.webp" alt="Balde de Pipoca Trufado" width="359" height="359" fetchpriority="high" loading="eager" decoding="async">
             </div>
 
             <div class="blue-banner">
@@ -655,7 +663,7 @@
                 </h1>
             </div>
             <div class="image-container">
-                <img src="imagem2.webp" loading="lazy" decoding="async" alt="Mulher fazendo doce">
+                <img src="imagem2.webp" alt="Mulher fazendo doce" width="359" height="359" loading="lazy" decoding="async">
             </div>
             <div class="text-center mb-4">
                 <p style="font-size: 14px; line-height: 17px; font-weight: 700; color: #4b5563;">ESCOLHA A OPÇÃO ABAIXO</p>
@@ -706,7 +714,7 @@
                 </h1>
             </div>
             <div class="image-container">
-                <img src="imagem3.webp" loading="lazy" decoding="async" alt="Baldes de pipoca em camadas">
+                <img src="imagem3.webp" alt="Baldes de pipoca em camadas" width="359" height="359" loading="lazy" decoding="async">
             </div>
             
             <button type="button" class="option-btn" onclick="selectOption(this)">
@@ -754,7 +762,7 @@
                 </h1>
             </div>
             <div class="image-container">
-                <img src="imagem4.webp" loading="lazy" decoding="async" alt="Fazendo caramelo na panela">
+                <img src="imagem4.webp" alt="Fazendo caramelo na panela" width="359" height="359" loading="lazy" decoding="async">
             </div>
             <div class="text-center mb-6">
                 <p class="description" style="margin-bottom: 16px;">
@@ -775,7 +783,7 @@
                 <h1 style="font-size: 22px; line-height: 28px; font-weight: 800; color: #1f2937;">O visual <span class="pink-text">vende sozinho!</span></h1>
             </div>
             <div class="image-container">
-                <img src="imagem5.webp" loading="lazy" decoding="async" alt="Chocolate escorrendo no balde">
+                <img src="imagem5.webp" alt="Chocolate escorrendo no balde" width="359" height="359" loading="lazy" decoding="async">
             </div>
             <div class="text-center mb-6">
                 <p class="description">
@@ -938,7 +946,7 @@
             
             <div class="mb-6">
                 <div class="text-center mb-4">
-                    <img src="imagem6.webp" loading="lazy" decoding="async" alt="Mockup dos bônus" style="max-width: 100%; height: auto; border-radius: 12px;">
+                    <img src="imagem6.webp" alt="Mockup dos bônus" width="359" height="359" loading="lazy" decoding="async" style="max-width: 100%; height: auto; border-radius: 12px;">
                 </div>
                 <div class="text-center mb-4">
                     <h2 style="font-size: 20px; font-weight: 900; color: #1f2937; text-transform: uppercase; font-style: italic;">Você ainda vai receber <br><span class="highlight-pink">DE BÔNUS:</span></h2>
@@ -1013,7 +1021,7 @@
 
             <div class="mb-6">
                 <div class="text-center mb-4">
-                    <img src="imagem7.webp" loading="lazy" decoding="async" alt="Oferta especial" style="max-width: 100%; height: auto; border-radius: 12px;">
+                    <img src="imagem7.webp" alt="Oferta especial" width="359" height="359" loading="lazy" decoding="async" style="max-width: 100%; height: auto; border-radius: 12px;">
                 </div>
             </div>
             
@@ -1050,27 +1058,13 @@
             </div>
             
             <div class="guarantee-badge">
-                <img src="imagem8.webp" loading="lazy" decoding="async" alt="Garantia de 7 dias">
+                <img src="imagem8.webp" alt="Garantia de 7 dias" width="100" height="100" loading="lazy" decoding="async">
             </div>
         </div>
     </div>
     
     <script>
         let currentStep = 0;
-
-        const imagesToPreload = [
-            "imagem1.webp",
-            "imagem2.webp",
-            "imagem3.webp",
-            "imagem4.webp",
-            "imagem5.webp",
-            "imagem6.webp",
-            "imagem7.webp",
-            "imagem8.webp"
-        ];
-
-        imagesToPreload.forEach(src => {
-            const img = new Image();
             img.src = src;
         });
 
@@ -1081,7 +1075,6 @@
                 
                 setTimeout(() => {
                     currentStepEl.classList.remove('active');
-                    currentStepEl.classList.remove('animate');
                     currentStepEl.classList.remove('step-out');
 
                     currentStep++;

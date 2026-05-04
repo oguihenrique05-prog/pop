@@ -13,6 +13,11 @@
 
     <!-- Prioridade para a imagem inicial/LCP -->
     <link rel="preload" as="image" href="imagem1.webp" fetchpriority="high">
+    <!-- Pré-carregamento das próximas imagens do fluxo -->
+    <link rel="prefetch" as="image" href="imagem2.webp">
+    <link rel="prefetch" as="image" href="imagem3.webp">
+    <link rel="prefetch" as="image" href="imagem4.webp">
+    <link rel="prefetch" as="image" href="imagem5.webp">
     
     <style>
         * {
@@ -663,7 +668,7 @@
                 </h1>
             </div>
             <div class="image-container">
-                <img src="imagem2.webp" alt="Mulher fazendo doce" width="359" height="359" loading="lazy" decoding="async">
+                <img src="imagem2.webp" alt="Mulher fazendo doce" width="359" height="359" loading="eager" decoding="async">
             </div>
             <div class="text-center mb-4">
                 <p style="font-size: 14px; line-height: 17px; font-weight: 700; color: #4b5563;">ESCOLHA A OPÇÃO ABAIXO</p>
@@ -714,7 +719,7 @@
                 </h1>
             </div>
             <div class="image-container">
-                <img src="imagem3.webp" alt="Baldes de pipoca em camadas" width="359" height="359" loading="lazy" decoding="async">
+                <img src="imagem3.webp" alt="Baldes de pipoca em camadas" width="359" height="359" loading="eager" decoding="async">
             </div>
             
             <button type="button" class="option-btn" onclick="selectOption(this)">
@@ -762,7 +767,7 @@
                 </h1>
             </div>
             <div class="image-container">
-                <img src="imagem4.webp" alt="Fazendo caramelo na panela" width="359" height="359" loading="lazy" decoding="async">
+                <img src="imagem4.webp" alt="Fazendo caramelo na panela" width="359" height="359" loading="eager" decoding="async">
             </div>
             <div class="text-center mb-6">
                 <p class="description" style="margin-bottom: 16px;">
@@ -783,7 +788,7 @@
                 <h1 style="font-size: 22px; line-height: 28px; font-weight: 800; color: #1f2937;">O visual <span class="pink-text">vende sozinho!</span></h1>
             </div>
             <div class="image-container">
-                <img src="imagem5.webp" alt="Chocolate escorrendo no balde" width="359" height="359" loading="lazy" decoding="async">
+                <img src="imagem5.webp" alt="Chocolate escorrendo no balde" width="359" height="359" loading="eager" decoding="async">
             </div>
             <div class="text-center mb-6">
                 <p class="description">
@@ -1121,8 +1126,22 @@
             }, 120);
         }
 
+        function preloadQuizImages() {
+            ['imagem2.webp', 'imagem3.webp', 'imagem4.webp', 'imagem5.webp'].forEach(function (src) {
+                const img = new Image();
+                img.decoding = 'async';
+                img.src = src;
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             showStep(0, false);
+
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(preloadQuizImages, { timeout: 1500 });
+            } else {
+                setTimeout(preloadQuizImages, 800);
+            }
         });
     </script>
 </body>

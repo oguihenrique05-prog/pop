@@ -39,8 +39,12 @@
         
         .step.active {
             display: block;
-            animation: fadeInSlideUp 0.5s 0.1s ease-out forwards;
-            opacity: 0; 
+            opacity: 1;
+        }
+
+        .step.active.animate {
+            opacity: 0;
+            animation: fadeInSlideUp 0.5s ease-out forwards;
         }
         
         .step-out {
@@ -618,7 +622,7 @@
             </div>
 
             <div class="image-container">
-                <img src="imagem1.webp" alt="Balde de Pipoca Trufado">
+                <img src="imagem1.webp" alt="Balde de Pipoca Trufado" loading="eager" fetchpriority="high" decoding="async">
             </div>
 
             <div class="blue-banner">
@@ -651,7 +655,7 @@
                 </h1>
             </div>
             <div class="image-container">
-                <img src="imagem2.webp" alt="Mulher fazendo doce">
+                <img src="imagem2.webp" loading="lazy" decoding="async" alt="Mulher fazendo doce">
             </div>
             <div class="text-center mb-4">
                 <p style="font-size: 14px; line-height: 17px; font-weight: 700; color: #4b5563;">ESCOLHA A OPÇÃO ABAIXO</p>
@@ -702,7 +706,7 @@
                 </h1>
             </div>
             <div class="image-container">
-                <img src="imagem3.webp" alt="Baldes de pipoca em camadas">
+                <img src="imagem3.webp" loading="lazy" decoding="async" alt="Baldes de pipoca em camadas">
             </div>
             
             <button type="button" class="option-btn" onclick="selectOption(this)">
@@ -750,7 +754,7 @@
                 </h1>
             </div>
             <div class="image-container">
-                <img src="imagem4.webp" alt="Fazendo caramelo na panela">
+                <img src="imagem4.webp" loading="lazy" decoding="async" alt="Fazendo caramelo na panela">
             </div>
             <div class="text-center mb-6">
                 <p class="description" style="margin-bottom: 16px;">
@@ -771,7 +775,7 @@
                 <h1 style="font-size: 22px; line-height: 28px; font-weight: 800; color: #1f2937;">O visual <span class="pink-text">vende sozinho!</span></h1>
             </div>
             <div class="image-container">
-                <img src="imagem5.webp" alt="Chocolate escorrendo no balde">
+                <img src="imagem5.webp" loading="lazy" decoding="async" alt="Chocolate escorrendo no balde">
             </div>
             <div class="text-center mb-6">
                 <p class="description">
@@ -934,7 +938,7 @@
             
             <div class="mb-6">
                 <div class="text-center mb-4">
-                    <img src="imagem6.webp" alt="Mockup dos bônus" style="max-width: 100%; height: auto; border-radius: 12px;">
+                    <img src="imagem6.webp" loading="lazy" decoding="async" alt="Mockup dos bônus" style="max-width: 100%; height: auto; border-radius: 12px;">
                 </div>
                 <div class="text-center mb-4">
                     <h2 style="font-size: 20px; font-weight: 900; color: #1f2937; text-transform: uppercase; font-style: italic;">Você ainda vai receber <br><span class="highlight-pink">DE BÔNUS:</span></h2>
@@ -1009,7 +1013,7 @@
 
             <div class="mb-6">
                 <div class="text-center mb-4">
-                    <img src="imagem7.webp" alt="Oferta especial" style="max-width: 100%; height: auto; border-radius: 12px;">
+                    <img src="imagem7.webp" loading="lazy" decoding="async" alt="Oferta especial" style="max-width: 100%; height: auto; border-radius: 12px;">
                 </div>
             </div>
             
@@ -1046,7 +1050,7 @@
             </div>
             
             <div class="guarantee-badge">
-                <img src="imagem8.webp" alt="Garantia de 7 dias">
+                <img src="imagem8.webp" loading="lazy" decoding="async" alt="Garantia de 7 dias">
             </div>
         </div>
     </div>
@@ -1077,13 +1081,14 @@
                 
                 setTimeout(() => {
                     currentStepEl.classList.remove('active');
+                    currentStepEl.classList.remove('animate');
                     currentStepEl.classList.remove('step-out');
 
                     currentStep++;
                     
                     const nextStepEl = document.getElementById(`step-${currentStep}`);
                     if (nextStepEl) {
-                        nextStepEl.classList.add('active'); 
+                        nextStepEl.classList.add('active', 'animate'); 
                         window.scrollTo(0, 0); 
                     }
                 }, 200); 
